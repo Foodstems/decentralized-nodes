@@ -1,0 +1,13 @@
+{
+    "name": "foodstems/decentralized-nodes",
+    "description": "A proof of concept",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "authors": [
+        {
+            "name": "Foodstems",
+            "email": "hi@foodstems.com"
+        }
+    ]
+}
