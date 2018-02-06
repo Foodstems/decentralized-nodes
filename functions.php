@@ -7,7 +7,7 @@ function get_db() {
 }
 
 function save_db($contents) {
-	file_put_contents($data_file, json_encode($contents));
+	file_put_contents("./data/data.txt", json_encode($contents));
 }
 
 function add_record($product) {
