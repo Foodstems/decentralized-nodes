@@ -1,18 +1,24 @@
 <?php
 
-include 'functions.php';
+include 'bootstrap.php';
 
 //@todo add new product to db, and broadcast that block to other nodes for validation
 //print some feedback if the block was accepted by other nodes
-
     $record_added = false;
 
-    if (isset($_POST['data'])) {
+    if (isset($_POST['name'])) {
 
-        $data = $_POST['data'];
+        $data = $_POST;
+        unset($data['submit']);
 
-        save_db($data);
-        $record_added = true;
+        $last_block = get_last_block();
+
+        if($data['previous_hash']!=$last_block['hash']) {
+            echo 'Hashes doesn\'t match';
+        } else {
+            echo 'Record added';
+            add_record($data);
+        }
     }
 
 ?>
@@ -28,7 +34,9 @@ include 'functions.php';
 <body>
     <?php  if (!$record_added) {?>
     <form action="" method="post" >
-        <textarea name="data" placeholder="Product json"></textarea>
+        <input type="input" name="name" placeholder="Name"/>
+        <input type="input" name="previous_hash" placeholder="Previous hash"/>
+
         <input type="submit" name="submit" value="Add" />
     </form>
     <?php } else {?>
