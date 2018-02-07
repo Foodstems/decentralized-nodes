@@ -2,8 +2,8 @@
 return [
 	'data'=>'./data/data.txt',
 	'other_nodes'=>[
-		"1.1.1.1",
-		"localhost",
-		"dev.foodstems.com"
-	]
+		"node.local",
+		"node2.local"
+	],
+	'guzzle_timeout'=>1
 ];
