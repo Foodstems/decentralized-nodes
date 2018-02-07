@@ -32,7 +32,7 @@ include 'bootstrap.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/stellar-sdk/stellar-sdk.min.js"></script>
     <script src="/bower_components/buffer/buffer.min.js"></script>
     <script src="/js/scripts.js"></script>
@@ -50,13 +50,13 @@ include 'bootstrap.php';
         
        
 
-        <div class="transaction-info">
+        <div class="transaction-info" style="display:none">
             <h2>Record was added</h2>
             <p>Product hash:</a>
             <p id="product_hash_response"></p>
 
             <p>Stellar transaction info<p>
-            <a id="stellar_link_response" href="">info</a>
+            <a target="_blank" id="stellar_link_response" href="">info</a>
 
 
             <p> <a href="index.php" >Add new</a></P>

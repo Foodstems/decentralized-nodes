@@ -50,6 +50,8 @@ function add_product() {
            var data = JSON.parse(response);
 
            $("#product_hash_response").text(data.latest.hash);
+
+           $(".transaction-info").show();
         }, 
         error: function(err){
 
