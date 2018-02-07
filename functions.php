@@ -36,12 +36,19 @@ function add_record($product) {
 }
 
 function make_hash($product) {
+	
 	$md5 = md5(json_encode($product));
 
 	$pack = pack('H*', $md5.$md5);
 	$base = base64_encode($pack);
-
 	return $base;
+}
+
+function make_stellar_hash($product) {
+
+	$md5 = md5(json_encode($product));
+
+	return $md5.$md5;
 }
 
 function get_last_block() {
