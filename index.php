@@ -48,7 +48,9 @@ include 'bootstrap.php';
 
     
         
-       
+       <div class="transaction-error" style="display:none">
+            <p id="error-message"></p>
+       </div>
 
         <div class="transaction-info" style="display:none">
             <h2>Record was added</h2>

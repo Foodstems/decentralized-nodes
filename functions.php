@@ -56,3 +56,15 @@ function get_last_block() {
 
 	return array_pop($db);
 }
+
+function find_by_hash($hash) {
+
+	$db = get_db();
+
+	$data = $db;
+	$hash = stripslashes($hash);
+
+	$key = array_search($hash, array_column($data, 'hash'));
+
+	return $key ? $data[$key] : false;
+}

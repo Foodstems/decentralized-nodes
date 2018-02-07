@@ -19,7 +19,9 @@ $(function(){
                var data = JSON.parse(response);
               
                product_hash = data.hash;
-               commit_stellar_transaction(product_hash);
+   
+               add_product(product_hash);
+              
             }, 
             error: function(err){
 
@@ -34,9 +36,9 @@ $(function(){
     })
 })
 
-function add_product() {
+function add_product(product_hash) {
 
-    var product_hash = "";
+
     var _data = {};
     _data.name = $("#name").val();
     _data.previous_hash = $("#previous_hash").val();
@@ -49,9 +51,18 @@ function add_product() {
        
            var data = JSON.parse(response);
 
-           $("#product_hash_response").text(data.latest.hash);
+           if (typeof data.error != "undefined") {
+               console.log('ne cini');
+                $("#error-message").text(data.error);
+                $(".transaction-error").show();
+                $(".transaction-info").hide();
+           } else {
+                console.log(product_hash)
+                $("#product_hash_response").text(data.latest.hash);
+                commit_stellar_transaction(product_hash)
 
-           $(".transaction-info").show();
+           }
+
         }, 
         error: function(err){
 
@@ -75,7 +86,7 @@ function commit_stellar_transaction(product_hash) {
         .addOperation(StellarSdk.Operation.payment({
             destination: receiverPublicKey,
             asset: StellarSdk.Asset.native(),
-            amount: '350.1234567',
+            amount: '1.1234567',
         }))
 
         .addMemo(hash)
@@ -87,7 +98,7 @@ function commit_stellar_transaction(product_hash) {
         server.submitTransaction(transaction)
         .then(function(transactionResult) {
             $("#stellar_link_response").attr("href", transactionResult._links.transaction.href);
-            add_product();
+            $(".transaction-info").show();
             
         })
         .catch(function(err) {
