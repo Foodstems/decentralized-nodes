@@ -75,7 +75,7 @@ function commit_stellar_transaction(product_hash) {
         .addOperation(StellarSdk.Operation.payment({
             destination: receiverPublicKey,
             asset: StellarSdk.Asset.native(),
-            amount: '350.1234567',
+            amount: '1',
         }))
 
         .addMemo(hash)

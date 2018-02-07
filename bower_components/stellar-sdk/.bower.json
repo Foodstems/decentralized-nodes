@@ -19,6 +19,5 @@
   },
   "_source": "https://github.com/stellar/bower-js-stellar-sdk.git",
   "_target": "^0.8.0",
-  "_originalSource": "stellar-sdk",
-  "_direct": true
+  "_originalSource": "stellar-sdk"
 }
