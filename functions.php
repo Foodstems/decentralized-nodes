@@ -56,3 +56,25 @@ function get_last_block() {
 
 	return array_pop($db);
 }
+
+function broadcast_block() {
+	global $config;
+
+	$client = new GuzzleHttp\Client();
+
+	foreach($config['other_nodes'] as $node) {
+		try {
+			$response= $client->request('POST', $node.'/callback.php', 
+			[
+				'body'=>json_encode(['test'=>'test']),
+				'timeout'=>$config['guzzle_timeout']
+			]);
+			//echo $response->getStatusCode().'<br>';
+			//echo $response->getBody();
+			echo 'Successfully broadcasted block to node '.$node;
+		} catch(\Exception $e) {
+			echo 'Error broadcasting block to node '.$node.': '.$e->getMessage();
+		}
+		echo "\n";
+	}
+}
