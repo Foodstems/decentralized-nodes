@@ -68,21 +68,29 @@ function find_by_hash($hash) {
 
 	return $key ? $data[$key] : false;
 }
-function broadcast_block() {
+
+function verify_block($block) {
+	$hash = $block['hash'];
+
+	unset($block['hash']);
+
+	return make_hash($block)===$hash;
+}
+
+function broadcast_block($block) {
 	global $config;
 
 	$client = new GuzzleHttp\Client();
 
 	foreach($config['other_nodes'] as $node) {
 		try {
-			$response= $client->request('POST', $node.'/callback.php', 
+			$response= $client->request('POST', $node, 
 			[
-				'body'=>json_encode(['test'=>'test']),
+				'body'=>json_encode($block),
 				'timeout'=>$config['guzzle_timeout']
 			]);
 			//echo $response->getStatusCode().'<br>';
-			//echo $response->getBody();
-			echo 'Successfully broadcasted block to node '.$node;
+			echo 'Successfully broadcasted block to node '.$node.'. Response: '.$response->getBody();
 		} catch(\Exception $e) {
 			echo 'Error broadcasting block to node '.$node.': '.$e->getMessage();
 		}
