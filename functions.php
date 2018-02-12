@@ -28,9 +28,10 @@ function save_db($contents) {
 	file_put_contents($config['data'], json_encode($contents));
 }
 
-function add_record($product) {
+function add_record($product, $do_not_calculate_hash=false) {
 	$db = get_db();
-	$product['hash'] = make_hash($product);
+	if(!$do_not_calculate_hash)
+		$product['hash'] = make_hash($product);
 	$db[]=$product;
 	save_db($db);
 }
