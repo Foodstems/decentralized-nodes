@@ -78,7 +78,6 @@ function update_stellar_hash_in_block(_data) {
         data: _data,
         success:function(response) {
             console.log('block updated')
-            window.location.href = "/";
         }, 
         error: function(err) {
             console.log("block not updated");

@@ -9,4 +9,8 @@ $base = base64_encode($pack);
 
 update_block($base, $post["stellar_transaction_hash"]);
 
+
+$latest = get_last_block();
+$broadcast_info = broadcast_block($latest);
+
 ?>

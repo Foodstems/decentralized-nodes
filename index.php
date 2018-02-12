@@ -79,7 +79,9 @@ include 'bootstrap.php';
         <?php foreach($latest_transactions as $transaction) {?>
             <tr>
                 <td><?php echo isset($transaction["name"]) ? $transaction["name"] : "" ?></td>
-                <td><?php echo isset($transaction["hash"]) ? $transaction["hash"] : "" ?></td>
+                <td>
+                    <?php echo (isset($transaction["hash"])) ? "<a target='_blank' href='/explorer.php?hash=".$transaction['hash']."'>".$transaction['hash']."</a>" : "" ?>
+                </td>
                 <td>
                     <?php echo (isset($transaction["stellar_transaction_hash"])) ? "<a target='_blank' href='https://horizon-testnet.stellar.org/transactions/".$transaction['stellar_transaction_hash']."'>".$transaction['stellar_transaction_hash']."</a>" : "" ?>
                 </td>
