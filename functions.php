@@ -63,11 +63,13 @@ function find_by_hash($hash) {
 	$db = get_db();
 
 	$data = $db;
-	$hash = stripslashes($hash);
 
-	$key = array_search($hash, array_column($data, 'hash'));
-
-	return $key ? $data[$key] : false;
+	foreach($data as $d) {
+		if($d['hash']==$hash)
+			return $d;
+	}
+	
+	return false;
 }
 
 function verify_block($block) {
