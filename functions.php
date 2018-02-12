@@ -115,7 +115,7 @@ function broadcast_block($block) {
 		try {
 			$response= $client->request('POST', $node, 
 			[
-				'body'=>json_encode($blo ck),
+				'body'=>json_encode($block),
 				'timeout'=>$config['guzzle_timeout']
 			]);
 			//echo $response->getStatusCode().'<br>';
