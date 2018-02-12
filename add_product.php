@@ -14,7 +14,8 @@ if($data['previous_hash']!=$last_block['hash']) {
     
     add_record($data);
     $latest = get_last_block();
-    echo json_encode(["latest"=>$latest]);
+    $broadcast_info = broadcast_block($latest);
+    echo json_encode(["latest"=>$latest, "broadcast_info"=>$broadcast_info]);
     exit;
 }
 

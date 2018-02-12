@@ -79,6 +79,7 @@ function verify_block($block) {
 
 function broadcast_block($block) {
 	global $config;
+	$info = '';
 
 	$client = new GuzzleHttp\Client();
 
@@ -90,10 +91,12 @@ function broadcast_block($block) {
 				'timeout'=>$config['guzzle_timeout']
 			]);
 			//echo $response->getStatusCode().'<br>';
-			echo 'Successfully broadcasted block to node '.$node.'. Response: '.$response->getBody();
+			$info.='Successfully broadcasted block to node '.$node.'. Response: '.$response->getBody();
 		} catch(\Exception $e) {
-			echo 'Error broadcasting block to node '.$node.': '.$e->getMessage();
+			$info.='Error broadcasting block to node '.$node.': '.$e->getMessage();
 		}
-		echo "\n";
+		$info.="\n";
+
 	}
+	return $info;
 }
