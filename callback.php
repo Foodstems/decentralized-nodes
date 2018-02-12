@@ -20,7 +20,7 @@ if($last['hash']!==$data['previous_hash']) {
 	exit;
 }
 
-add_record($data);
+add_record($data, true);
 echo 'Block added.';
 // @todo check hashes and insert data in db if correct
 // @todo broadcast the block to other nodes if correct, with guzzle send post to all the nodes in config, on /callback.php
