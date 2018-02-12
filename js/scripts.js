@@ -78,6 +78,7 @@ function update_stellar_hash_in_block(_data) {
         data: _data,
         success:function(response) {
             console.log('block updated')
+            window.location.href = "/";
         }, 
         error: function(err) {
             console.log("block not updated");
@@ -119,7 +120,11 @@ function commit_stellar_transaction(product_hash) {
             $("#stellar_transaction_hash").val(transactionResult.hash);
             $(".transaction-info").show();
 
-            update_stellar_hash_in_block({"product_hash":product_hash, "stellar_transaction_hash":transactionResult.hash});
+            var _data = {};
+            _data.product_hash = product_hash;
+            _data.stellar_transaction_hash = transactionResult.hash;
+
+            update_stellar_hash_in_block(_data);
             
         })
         .catch(function(err) {

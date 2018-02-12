@@ -74,8 +74,35 @@ function verify_block($block) {
 	$hash = $block['hash'];
 
 	unset($block['hash']);
+	unset($block["stellar_transaction_hash"]);
 
 	return make_hash($block)===$hash;
+}
+
+function update_block($hash, $stellar_transaction_hash) {
+
+	$db = get_db();
+
+	$block = find_by_hash($hash);
+	array_pop($db);
+
+	$_block 					= [];
+	$_block["name"] 			= $block["name"];
+	$_block["previous_hash"] 	= $block["previous_hash"];
+	$_block["hash"] 			= $block["hash"];
+	$_block["stellar_transaction_hash"] = $stellar_transaction_hash;
+
+	$db[]=$_block;
+	save_db($db);
+}
+
+function get_latest_transactions($number=10) {
+
+	$db 	= get_db();
+
+	$data = array_reverse($db);
+
+	return array_slice($data, 0 , $number);
 }
 
 function broadcast_block($block) {

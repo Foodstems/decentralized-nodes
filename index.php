@@ -5,6 +5,7 @@ include 'bootstrap.php';
 //@todo add new product to db, and broadcast that block to other nodes for validation
 //print some feedback if the block was accepted by other nodes
     $record_added = false;
+    $latest_transactions = get_latest_transactions();
     /*
     if (isset($_POST['name'])) {
 
@@ -32,6 +33,7 @@ include 'bootstrap.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/stellar-sdk/stellar-sdk.min.js"></script>
     <script src="/bower_components/buffer/buffer.min.js"></script>
@@ -62,6 +64,30 @@ include 'bootstrap.php';
             <input type="hidden" id="stellar_transaction_hash" />
             <p> <a href="index.php" >Add new</a></P>
         </div>
+
+
+    
+    <?php if(count($latest_transactions)) { ?>
+        <h2>Last transactions</h2>
+        <table class="table">
+        <tr>
+            <td>Data</td>
+            <td>Memo hash</td>
+            <td>Transaction hash</td>
+        </td>
+
+        <?php foreach($latest_transactions as $transaction) {?>
+            <tr>
+                <td><?php echo isset($transaction["name"]) ? $transaction["name"] : "" ?></td>
+                <td><?php echo isset($transaction["hash"]) ? $transaction["hash"] : "" ?></td>
+                <td>
+                    <?php echo (isset($transaction["stellar_transaction_hash"])) ? "<a target='_blank' href='https://horizon-testnet.stellar.org/transactions/".$transaction['stellar_transaction_hash']."'>".$transaction['stellar_transaction_hash']."</a>" : "" ?>
+                </td>
+            </tr>
+        <?php } ?>
+       
+        </table>
+    <?php } ?>
 
 </body>
 
