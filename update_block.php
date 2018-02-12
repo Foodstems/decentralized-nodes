@@ -13,5 +13,3 @@ update_block($base, $post["stellar_transaction_hash"]);
 $latest = get_last_block();
 $latest["stellar_transaction_hash"] = $post["stellar_transaction_hash"];
 $broadcast_info = broadcast_block($latest);
-
-?>
