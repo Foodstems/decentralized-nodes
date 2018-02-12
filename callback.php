@@ -3,6 +3,7 @@ include 'bootstrap.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 
+$stellar_transaction_hash = $data["stellar_transaction_hash"];
 $last = get_last_block();
 
 if(!verify_block($data)) {
@@ -19,7 +20,7 @@ if($last['hash']!==$data['previous_hash']) {
 	echo 'Block previous_hash not valid.';
 	exit;
 }
-
+$data["stellar_transaction_hash"] = $stellar_transaction_hash;
 add_record($data, true);
 echo 'Block added.';
 // @todo check hashes and insert data in db if correct
