@@ -59,8 +59,7 @@ include 'bootstrap.php';
 
             <p>Stellar transaction info<p>
             <a target="_blank" id="stellar_link_response" href="">info</a>
-
-
+            <input type="hidden" id="stellar_transaction_hash" />
             <p> <a href="index.php" >Add new</a></P>
         </div>
 

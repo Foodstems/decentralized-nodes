@@ -70,6 +70,23 @@ function add_product(product_hash) {
     })
 }
 
+function update_stellar_hash_in_block(_data) {
+
+    $.ajax({
+        type: "post",
+        url: "/update_block.php",
+        data: _data,
+        success:function(response) {
+            console.log('block updated')
+        }, 
+        error: function(err) {
+            console.log("block not updated");
+            console.log(err)
+        } 
+    });
+
+}
+
 function commit_stellar_transaction(product_hash) {
 
     var sourceSecretKey = 'SBABKJ36RL5BW2A6RCVPPTVGGBMHTRLI7CZH25RC3UCH3DIZHWMBYWLK';
@@ -97,8 +114,12 @@ function commit_stellar_transaction(product_hash) {
 
         server.submitTransaction(transaction)
         .then(function(transactionResult) {
+            
             $("#stellar_link_response").attr("href", transactionResult._links.transaction.href);
+            $("#stellar_transaction_hash").val(transactionResult.hash);
             $(".transaction-info").show();
+
+            update_stellar_hash_in_block({"product_hash":product_hash, "stellar_transaction_hash":transactionResult.hash});
             
         })
         .catch(function(err) {
