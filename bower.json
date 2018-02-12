@@ -18,6 +18,7 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "buffer": "^3.46.1",
-    "stellar-sdk": "^0.8.0"
+    "stellar-sdk": "^0.8.0",
+    "bootstrap": "^4.0.0"
   }
 }
