@@ -100,12 +100,9 @@ function commit_stellar_transaction(product_hash) {
     .then(function(account) {
         var transaction = new StellarSdk.TransactionBuilder(account)
 
-        .addOperation(StellarSdk.Operation.payment({
-            destination: receiverPublicKey,
-            asset: StellarSdk.Asset.native(),
-            amount: '1',
+        .addOperation(StellarSdk.Operation.setOptions({
+            homeDomain: 'foodstems.com'
         }))
-
         .addMemo(hash)
         .build();
 
