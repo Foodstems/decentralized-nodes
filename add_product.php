@@ -2,7 +2,6 @@
 
 include 'bootstrap.php';
 
-
 $data = $_POST;
 
 $last_block = get_last_block();
