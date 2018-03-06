@@ -1,6 +1,7 @@
 <?php
 include 'bootstrap.php';
 
+// If the hash provided exists, show info about it
 if (isset($_GET["hash"])) {
     
     $product = find_by_hash($_GET['hash']); 

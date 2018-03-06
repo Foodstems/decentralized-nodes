@@ -1,5 +1,8 @@
 <?php
 
+/*
+* Return the blockchain as an array
+*/
 function get_db() {
 	global $config;
 
@@ -8,6 +11,10 @@ function get_db() {
 	return json_decode(file_get_contents($config['data']), true);
 }
 
+/*
+* Create the path provided in the config.
+* Create the first hash and put it in the file.
+*/
 function init_db() {
 	global $config;
 	if (!is_dir(dirname($config['data']))) {
@@ -20,6 +27,9 @@ function init_db() {
 	}
 }
 
+/*
+* Save previously read database
+*/
 function save_db($contents) {
 	global $config;
 
@@ -28,6 +38,10 @@ function save_db($contents) {
 	file_put_contents($config['data'], json_encode($contents));
 }
 
+/*
+* Add a new block.
+* Do not calculate hash - applies to blocks that have their hash already calculated
+*/
 function add_record($product, $do_not_calculate_hash=false) {
 	$db = get_db();
 	if(!$do_not_calculate_hash)
@@ -36,6 +50,9 @@ function add_record($product, $do_not_calculate_hash=false) {
 	save_db($db);
 }
 
+/*
+* Create a hash, matches the Stellar algorithm
+*/
 function make_hash($product) {
 	
 	$md5 = md5(json_encode($product));
@@ -45,6 +62,9 @@ function make_hash($product) {
 	return $base;
 }
 
+/*
+* Stellar asks 64 characters, so we send the md5 of the hash twice
+*/
 function make_stellar_hash($product) {
 
 	$md5 = md5(json_encode($product));
@@ -52,12 +72,18 @@ function make_stellar_hash($product) {
 	return $md5.$md5;
 }
 
+/*
+* Return the last block of the blockchain
+*/
 function get_last_block() {
 	$db = get_db();
 
 	return array_pop($db);
 }
 
+/*
+* Find block by hash (linear time of execution)
+*/
 function find_by_hash($hash) {
 
 	$db = get_db();
@@ -72,6 +98,9 @@ function find_by_hash($hash) {
 	return false;
 }
 
+/*
+* Verify block
+*/
 function verify_block($block) {
 	$hash = $block['hash'];
 
@@ -81,6 +110,9 @@ function verify_block($block) {
 	return make_hash($block)===$hash;
 }
 
+/*
+* Update block
+*/
 function update_block($hash, $stellar_transaction_hash) {
 
 	$db = get_db();
@@ -98,6 +130,9 @@ function update_block($hash, $stellar_transaction_hash) {
 	save_db($db);
 }
 
+/*
+* Get latest transactions
+*/
 function get_latest_transactions($number=10) {
 
 	$db 	= get_db();
@@ -107,6 +142,9 @@ function get_latest_transactions($number=10) {
 	return array_slice($data, 0 , $number);
 }
 
+/*
+* Broadcast block to other nodes listed in the config file
+*/
 function broadcast_block($block) {
 	global $config;
 	$info = '';

@@ -2,29 +2,9 @@
 
 include 'bootstrap.php';
 
-//@todo add new product to db, and broadcast that block to other nodes for validation
-//print some feedback if the block was accepted by other nodes
     $record_added = false;
+    // Get latest transactions and list below
     $latest_transactions = get_latest_transactions();
-    /*
-    if (isset($_POST['name'])) {
-
-        $data = $_POST;
-        unset($data['submit']);
-
-        $last_block = get_last_block();
-
-        if($data['previous_hash']!=$last_block['hash']) {
-            echo 'Hashes doesn\'t match';
-        } else {
-            echo 'Record added';
-            add_record($data);
-            $latest = get_last_block();
-            print "\nInfo\n";
-            print_r($latest);
-        }
-    }
-    */
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +18,7 @@ include 'bootstrap.php';
     <script src="/bower_components/stellar-sdk/stellar-sdk.min.js"></script>
     <script src="/bower_components/buffer/buffer.min.js"></script>
     <script src="/js/scripts.js"></script>
-    <title>Document</title>
+    <title>Block Explorer</title>
 </head>
 <body>
 
