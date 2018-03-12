@@ -18,6 +18,7 @@ include 'bootstrap.php';
     <script src="/bower_components/stellar-sdk/stellar-sdk.min.js"></script>
     <script src="/bower_components/buffer/buffer.min.js"></script>
     <script src="/js/scripts.js"></script>
+    <script src="/config.js"></script>
     <title>Block Explorer</title>
 </head>
 <body>

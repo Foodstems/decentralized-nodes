@@ -1,0 +1,6 @@
+var Foodstems = {
+	"payeer_private_key" : "SBABKJ36RL5BW2A6RCVPPTVGGBMHTRLI7CZH25RC3UCH3DIZHWMBYWLK",
+	"payeer_public_key" : "",
+	"receiver_private_key" : "",
+	"receiver_public_key" : "GA3TS46MPMIBYFU6IZCXXI54265AKLNM36SG6DVHI4KLK5H6TDTWFAQY",
+}

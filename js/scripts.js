@@ -89,13 +89,13 @@ function update_stellar_hash_in_block(_data) {
 
 function commit_stellar_transaction(product_hash) {
 
-    var sourceSecretKey = 'SBABKJ36RL5BW2A6RCVPPTVGGBMHTRLI7CZH25RC3UCH3DIZHWMBYWLK';
+    var sourceSecretKey = Foodstems.payeer_private_key;
 
     var hash = new StellarSdk.Memo(StellarSdk.MemoHash, product_hash);
 
     var sourceKeypair = StellarSdk.Keypair.fromSecret(sourceSecretKey);
     var stellar_public_key = sourceKeypair.publicKey();
-    var receiverPublicKey = 'GA3TS46MPMIBYFU6IZCXXI54265AKLNM36SG6DVHI4KLK5H6TDTWFAQY';
+    var receiverPublicKey = Foodstems.receiver_public_key;
     server.loadAccount(stellar_public_key)
     .then(function(account) {
         var transaction = new StellarSdk.TransactionBuilder(account)
